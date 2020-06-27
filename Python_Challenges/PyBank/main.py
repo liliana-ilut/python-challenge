@@ -7,9 +7,6 @@ csv_path = os.path.join("Resources", "budget_data.csv")
     #print the path to make sure the path opens correctly. Mark the print in a cooment so it won't interact with our main code
 #print ("opening", csv_path)
 
-    #output file for the analysis text
-output_file = "financial_analysis.txt"
-
     #open and read the csv file
 with open(csv_path, "r") as in_file:
     csv_reader = csv.reader(in_file)
@@ -41,26 +38,17 @@ with open(csv_path, "r") as in_file:
     great_increase_profit = max(revenue_change)
     great_decrease_loss = min(revenue_change)
   
-    # print out results 
-    print("financial analysis")
-    print("__________________________")
-    print("Total Months : " + str(total_months))
-    print("Total Profit/Losses : " + "$" + str(total_pro_los))
-    print("Average Change : " + "$" + str(round(average_change, 2)))
-    print("Greatest Increase in Profit : " + str(months[revenue_change.index(max(revenue_change))+1]) + " " + "$" + str(great_increase_profit))
-    print("Greatest Decrease in profit : " + str(months[revenue_change.index(min(revenue_change))+1]) + " " + "$" + str(great_decrease_loss))
 
-    #export the financil analysis in a text file
-with open(output_file, "w+") as analysis_text:
-    analysis_text.write("financial analysis\n")
-    analysis_text.write("__________________________\n")
-    analysis_text.write("\n")
-    analysis_text.write("Total Months: " + str(total_months))
-    analysis_text.write("\n")
-    analysis_text.write("Total: " + "$" + str(total_pro_los))
-    analysis_text.write("\n")
-    analysis_text.write("Average Change: " + "$" + str(round(average_change, 2)))
-    analysis_text.write("\n")
-    analysis_text.write("Greatest Profit Increase: " + str(months[revenue_change.index(max(revenue_change))+1]) + " " + "$" + str(great_increase_profit))
-    analysis_text.write("\n")
-    analysis_text.write("Greatest Profit Decrease: " + str(months[revenue_change.index(min(revenue_change))+1]) + " " + "$" + str(great_decrease_loss))
+   #print the results in the terminal
+   #create a separate text file with the results/analysis
+with open("financial analysis.txt", "w") as text_file :
+    print("financial analysis", file = text_file)
+    print("__________________________", file = text_file)
+    print("Total Months : " + str(total_months) , file = text_file)
+    print("Total Profit/Losses : " + "$" + str(total_pro_los) , file = text_file)
+    print("Average Change : " + "$" + str(round(average_change, 2)) , file = text_file)
+    print("Greatest Increase in Profit : " + str(months[revenue_change.index(max(revenue_change))+1]) + " " + "$" + str(great_increase_profit) , file = text_file)
+    print("Greatest Decrease in profit : " + str(months[revenue_change.index(min(revenue_change))+1]) + " " + "$" + str(great_decrease_loss) , file = text_file)
+
+with open("financial analysis.txt", "r") as text_file:
+    print(text_file.read())
